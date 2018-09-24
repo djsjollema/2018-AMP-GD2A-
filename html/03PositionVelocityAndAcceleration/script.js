@@ -8,7 +8,7 @@ let kineticObject = {};
 function setUp(){
   kineticObject.point = new Point(200,300,"red");
   kineticObject.pos = new Vector2d(800,300);
-  kineticObject.vel = new Vector2d(1,2);
+  kineticObject.vel = new Vector2d(8,5);
   kineticObject.acc = new Vector2d(0,0);
 
   //kineticObject.point.position(kineticObject.pos);
@@ -19,6 +19,12 @@ function setUp(){
 function update(){
   context.clearRect(0,0,canvas.width,canvas.height);
   requestAnimationFrame(update);
+  if(kineticObject.pos.dx<0 || kineticObject.pos.dx > canvas.width){
+    kineticObject.vel.dx = -kineticObject.vel.dx;
+  }
+  if(kineticObject.pos.dy<0 || kineticObject.pos.dy > canvas.height){
+    kineticObject.vel.dy = -kineticObject.vel.dy;
+  }
   kineticObject.pos.add(kineticObject.vel);
   kineticObject.point.position(kineticObject.pos);
   kineticObject.point.draw(context);
