@@ -8,14 +8,20 @@ let kineticObject = {};
 function setUp(){
   kineticObject.point = new Point(200,300,"red");
   kineticObject.pos = new Vector2d(800,300);
-  kineticObject.point.position(kineticObject.pos);
-  kineticObject.point.draw(context);
-  //update();
+  kineticObject.vel = new Vector2d(1,2);
+  kineticObject.acc = new Vector2d(0,0);
+
+  //kineticObject.point.position(kineticObject.pos);
+  //kineticObject.point.draw(context);
+  update();
 }
 
 function update(){
   context.clearRect(0,0,canvas.width,canvas.height);
   requestAnimationFrame(update);
+  kineticObject.pos.add(kineticObject.vel);
+  kineticObject.point.position(kineticObject.pos);
+  kineticObject.point.draw(context);
 }
 
 setUp();
