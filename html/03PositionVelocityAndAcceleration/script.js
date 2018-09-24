@@ -3,8 +3,14 @@ const context = canvas.getContext('2d');
 canvas.width = window.innerWidth ;
 canvas.height = window.innerHeight;
 
+let kineticObject = {};
+
 function setUp(){
-  update();
+  kineticObject.point = new Point(200,300,"red");
+  kineticObject.pos = new Vector2d(800,300);
+  kineticObject.point.position(kineticObject.pos);
+  kineticObject.point.draw(context);
+  //update();
 }
 
 function update(){
