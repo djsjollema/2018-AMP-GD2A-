@@ -7,3 +7,11 @@ let A = new Point(200,200,20,"blue");
 A.draw(context);
 
 A.drag();
+
+function animate(){
+  context.clearRect(0,0,canvas.width,canvas.height);
+  requestAnimationFrame(animate);
+  A.draw(context);
+}
+
+animate();
