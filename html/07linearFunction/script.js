@@ -16,12 +16,18 @@ B.drag();
 function animate(){
   context.clearRect(0,0,canvas.width,canvas.height);
   requestAnimationFrame(animate);
+
+  f.letTwoPointsDefineLine(A,B);
+  C.x = 0; C.y = f.calcY(0);
+  D.x = canvas.width; D.y = f.calcY(canvas.width);
+
+  f.draw(context);
+
   A.draw(context);
   B.draw(context);
   C.draw(context);
   D.draw(context);
-  f.letTwoPointsDefineLine(A,B);
-  //console.log(f.slope);
+
 }
 
 animate();
