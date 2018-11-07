@@ -21,7 +21,10 @@ function animate(){
   requestAnimationFrame(animate);
 
   l.letTwoPointsDefineLine(A,B);
-  m.slope = -1/l.slope
+  m.slope = -1/l.slope;
+  m.intercept = C.y - m.slope*C.x;
+  S.x = l.intersection(m).x;
+  S.y = l.intersection(m).y;
 
   l.draw(context);
   m.draw(context);

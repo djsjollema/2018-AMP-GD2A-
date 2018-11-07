@@ -15,7 +15,7 @@ function setUp(){
 
 function update(){
   requestAnimationFrame(update);
-  let myPoint = new Point(getRandomNumber(canvas.width),getRandomNumber(canvas.height));
+  let myPoint = new Point(getRandomNumber(canvas.width),getRandomNumber(canvas.height),10,"blue");
   myPoints.push(myPoint);
   context.clearRect(0,0,canvas.width,canvas.height);
   for (let i = 0; i < myPoints.length; i++) {
