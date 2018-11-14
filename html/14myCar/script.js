@@ -22,10 +22,9 @@ addEventListener('keydown',(evt)=>{
     case "ArrowRight":
       frontWheel.vel += 1;
       break;
-      case "ArrowLeft":{
+      case "ArrowLeft":
       frontWheel.vel -= 1;
       break;
-      }
     default:
 
   }
