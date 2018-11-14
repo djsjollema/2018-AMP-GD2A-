@@ -14,6 +14,21 @@ frontWheel.vel = 10;
 
 background.addEventListener('load',()=>{
   animate();
+});
+
+addEventListener('keydown',(evt)=>{
+  console.log(evt.key);
+  switch (evt.key) {
+    case "ArrowRight":
+      frontWheel.vel += 1;
+      break;
+      case "ArrowLeft":{
+      frontWheel.vel -= 1;
+      break;
+      }
+    default:
+
+  }
 })
 
 function animate(){
@@ -30,4 +45,6 @@ function animate(){
   if(frontWheel.pos>canvas.width){
     frontWheel.pos = 0;
   }
-}
+  if(frontWheel.pos<0){
+    frontWheel.pos = canvas.width;
+  }}
