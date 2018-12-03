@@ -17,10 +17,8 @@ function animate(){
   context.translate(midX,midY);
   if(mouse.x > midX){
     rot = Math.atan((mouse.y - midY)/(mouse.x - midX));
-
   } else {
     rot = Math.atan((mouse.y - midY)/(mouse.x - midX)) - Math.PI;
-
   }
   context.rotate(rot);
   drawArrow(context);
