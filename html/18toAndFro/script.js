@@ -58,19 +58,19 @@ function animate(){
   if(moveToA){
     distance = player.point.distanceToOtherPoint(A.point);
     player.vel.differenceVector(A.pos,player.pos);
-    if(player.point.distanceToOtherPoint(A.point)<5){
+    if(player.point.distanceToOtherPoint(A.point)<A.point.r + player.point.r){
       moveToA = false;
     }
   } else {
     distance = player.point.distanceToOtherPoint(B.point);
     player.vel.differenceVector(B.pos,player.pos);
-    if(player.point.distanceToOtherPoint(B.point)<5){
+    if(player.point.distanceToOtherPoint(B.point)<A.point.r + player.point.r){
       moveToA = true;
     }
   }
 
-  player.vel.magnitude = 1/40*(distance + 1);
-  player.vel.draw(context,player.pos.dx,player.pos.dy,20);
+  player.vel.magnitude = distance/100 + 1;
+  //player.vel.draw(context,player.pos.dx,player.pos.dy,20);
 
   // player.pos.draw(context,0,0,1);
   // B.pos.draw(context,0,0,1);
