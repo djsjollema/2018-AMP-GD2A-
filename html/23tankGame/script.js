@@ -73,10 +73,22 @@ function update(){
   if(dt >  1/fps){
     startTime = new Date();
     greenTank.move();
-
   }
   greenTank.draw();
 
 }
 
 setUp();
+
+addEventListener('keydown',(evt)=>{
+  switch (evt.key) {
+    case "ArrowRight":
+      greenTank.vel.angle += 0.1;
+      break;
+      case "ArrowLeft":
+        greenTank.vel.angle -= 0.1;
+        break;
+    default:
+
+  }
+})
