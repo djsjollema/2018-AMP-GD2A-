@@ -5,7 +5,7 @@ class Tank {
     this.sw = 32;
     this.sh = 32;
     this.pos = new Vector2d(100,100);
-    this.vel = new Vector2d(6,7);
+    this.vel = new Vector2d(6,6);
     this.w =64;
     this.h = 64;
 
@@ -39,7 +39,11 @@ class Tank {
   }
 
   draw(){
-    context.drawImage(this.spriteSheet,this.sx,this.sy,this.sw,this.sh,this.pos.dx,this.pos.dy,64,64);
+    context.save();
+    context.translate(this.pos.dx,this.pos.dy);
+    context.rotate(this.vel.angle  + Math.PI/2);
+    context.drawImage(this.spriteSheet,this.sx,this.sy,this.sw,this.sh,-16,-16,64,64);
+    context.restore();
   }
 }
 
