@@ -1,14 +1,22 @@
 class Bullet{
   constructor(){
     this.pos = new Vector2d(100,100);
+    this.vel = new Vector2d(2,2);
     this.spriteSheet = new Image();
     this.spriteSheet.src = "Tanks_sheet.png";
+  }
+
+  update(){
+    this.pos.add(this.vel);
   }
 
   draw(){
     let sx = (21%8)*32;
     let sy = Math.floor(21/8)*32;
-    context.drawImage(this.spriteSheet,sx,sy,32,32,this.pos.dx,this.pos.dy,64,64)
+    context.save();
+    context.translate(this.pos.dx,this.pos.dy)
+    context.drawImage(this.spriteSheet,sx,sy,32,31,-32,-32,64,64);
+    context.restore();
   }
 
 }
@@ -21,7 +29,7 @@ class Tank {
     this.sw = 32;
     this.sh = 32;
     this.pos = new Vector2d(100,100);
-    this.vel = new Vector2d(3,3);
+    this.vel = new Vector2d(0,0);
     this.w =64;
     this.h = 64;
 
@@ -90,6 +98,9 @@ function update(){
   if(dt >  1/fps){
     startTime = new Date();
     greenTank.move();
+    for (var i = 0; i < bullets.length; i++) {
+      bullets[i].update();
+    }
   }
   greenTank.draw();
   for (var i = 0; i < bullets.length; i++) {
@@ -125,6 +136,8 @@ addEventListener('keydown',(evt)=>{
       let bullet = new Bullet();
       bullet.pos.dx = greenTank.pos.dx;
       bullet.pos.dy = greenTank.pos.dy;
+      bullet.vel.dx = greenTank.vel.dx * 2;
+      bullet.vel.dy = greenTank.vel.dy * 2;
       bullets.push(bullet);
     break;
     default:
