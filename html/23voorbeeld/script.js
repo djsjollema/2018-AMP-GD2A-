@@ -100,6 +100,9 @@ function update(){
     greenTank.move();
     for (var i = 0; i < bullets.length; i++) {
       bullets[i].update();
+      if(bullets[i].pos.dx < 0 || bullets[i].pos.dx > canvas.width || bullets[i].pos.dy < 0  || bullets[i].pos.dy > canvas.height ){
+        bullets.splice(i,1);
+      }
     }
   }
   greenTank.draw();
