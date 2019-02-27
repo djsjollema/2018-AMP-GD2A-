@@ -8,6 +8,7 @@ let A,B,l,player;
 function setUp(){
   A = new Point(100,200,20,"yellow");
   B = new Point(600,400,20,"yellow");
+  A.drag(); B.drag();
   l = new LinearFunction(1,1);
 
   player = {};
@@ -33,9 +34,13 @@ function animate(){
   player.position.add(player.velocity);
   player.point.position(player.position);
   player.point.draw(context);
+
+
+  l.letTwoPointsDefineLine(A,B);
+  l.draw(context);
+
   A.draw(context);
   B.draw(context);
-  l.draw(context);
 }
 
 setUp();
