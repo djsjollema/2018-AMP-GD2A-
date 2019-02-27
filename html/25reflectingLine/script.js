@@ -3,13 +3,18 @@ const context = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let A,B,l,player;
+let A,B,l,m,player,S,i,j;
 
 function setUp(){
   A = new Point(100,200,20,"yellow");
   B = new Point(600,400,20,"yellow");
+  S = new Point(600,400,10,"white");
   A.drag(); B.drag();
   l = new LinearFunction(1,1);
+  m = new LinearFunction(1,1);
+
+  i = new Vector2d(1,1);
+  j = new Vector2d(-1,1);
 
   player = {};
   player.position = new Vector2d(400,400);
@@ -31,7 +36,8 @@ function animate(){
     player.velocity.dy = -player.velocity.dy;
   }
 
-  player.velocity.draw(context,player.position.dx,player.position.dy,30 )
+  player.velocity.draw(context,player.position.dx,player.position.dy,30);
+
 
   player.position.add(player.velocity);
   player.point.position(player.position);
@@ -41,8 +47,32 @@ function animate(){
   l.letTwoPointsDefineLine(A,B);
   l.draw(context);
 
+  m.slope = -1/l.slope;
+  m.intercept = player.position.dy - player.position.dx * m.slope;
+
+
+
+
   A.draw(context);
   B.draw(context);
+
+  m.draw(context);
+
+  S.x = l.intersection(m).x;
+  S.y = l.intersection(m).y;
+
+  S.draw(context);
+
+  i.dx = 1;
+  i.dy = l.slope;
+
+  j.dx = 1;
+  j.dy = m.slope;
+
+
+  i.draw(context,player.position.dx,player.position.dy,50);
+  j.draw(context,player.position.dx,player.position.dy,50);
+
 }
 
 setUp();
