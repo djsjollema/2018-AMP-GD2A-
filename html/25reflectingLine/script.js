@@ -36,12 +36,12 @@ function animate(){
     player.velocity.dy = -player.velocity.dy;
   }
 
-  player.velocity.draw(context,player.position.dx,player.position.dy,30);
+  player.velocity.draw(context,player.position.dx,player.position.dy,50);
 
 
   player.position.add(player.velocity);
   player.point.position(player.position);
-  player.point.draw(context);
+
 
 
   l.letTwoPointsDefineLine(A,B);
@@ -66,14 +66,22 @@ function animate(){
   i.dx = 1;
   i.dy = l.slope;
   i.magnitude = 1;
+  i.magnitude = player.velocity.dot(i);
 
   j.dx = 1;
   j.dy = m.slope;
   j.magnitude = 1;
+  j.magnitude = player.velocity.dot(j);
 
 
   i.draw(context,player.position.dx,player.position.dy,50);
   j.draw(context,player.position.dx,player.position.dy,50);
+
+  if(player.point.distanceToOtherPoint(S) < player.point.r){
+    j.angle += Math.PI;
+    player.velocity.sumVector(i,j);
+  }
+  player.point.draw(context);
 
 }
 
