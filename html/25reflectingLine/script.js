@@ -65,9 +65,11 @@ function animate(){
 
   i.dx = 1;
   i.dy = l.slope;
+  i.magnitude = 1;
 
   j.dx = 1;
   j.dy = m.slope;
+  j.magnitude = 1;
 
 
   i.draw(context,player.position.dx,player.position.dy,50);
