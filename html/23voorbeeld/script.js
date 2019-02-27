@@ -29,7 +29,7 @@ class Tank {
     this.sw = 32;
     this.sh = 32;
     this.pos = new Vector2d(100,100);
-    this.vel = new Vector2d(0,0);
+    this.vel = new Vector2d(2,2);
     this.w =64;
     this.h = 64;
 
@@ -71,6 +71,7 @@ class Tank {
   }
 }
 
+
 const canvas = document.getElementById('canvas');
 const context = canvas.getContext('2d');
 canvas.width = window.innerWidth;
@@ -79,13 +80,25 @@ canvas.height = window.innerHeight;
 let startTime,currentTime,dt,fps;
 let greenTank;
 let bullets = [];
-
+let background = [0,0,0,0];
+let backgrounds = [0,24,25,26,27,28,29,30]
+let spriteSheet = new Image();
+spriteSheet.src = "Tanks_sheet.png";
+let positionIndex = 0;
 
 
 function setUp(){
   startTime = new Date(); // set starttime
   fps = 10; //frames per second
   greenTank = new Tank();
+  for (let i = 0; i < Math.floor(canvas.width/32 * canvas.height/32); i++) {
+    if(Math.random()<0.05){
+        background[i] = backgrounds[Math.floor(Math.random()*backgrounds.length)];
+
+    } else {
+      background[i]=0;
+    }
+  }
   update();
 }
 
@@ -105,14 +118,38 @@ function update(){
       }
     }
   }
+  for (var i = 0; i < background.length; i++) {
+    drawBackground(background[i],i);
+  }
+  positionIndex = getGreenTankIndex();
+
+  context.strokeRect(positionIndex%blocksOnRow * 64, Math.floor(positionIndex/blocksOnRow)*64,64,64);
+
+
   greenTank.draw();
   for (var i = 0; i < bullets.length; i++) {
     bullets[i].draw();
   }
 
+
+
+
 }
 
 setUp();
+
+function drawBackground(i,n){
+  blocksOnRow = Math.floor(canvas.width/32);
+  let sx = i%8 *32;
+  let sy = Math.floor(i/8)*32;
+  let x = n%blocksOnRow * 64;
+  let y = Math.floor(n/blocksOnRow)*64;
+  context.drawImage(spriteSheet,sx,sy,32,32,x,y,64,64);
+}
+
+function getGreenTankIndex(){
+  return Math.floor(greenTank.pos.dy/64)* blocksOnRow + Math.floor(greenTank.pos.dx/64)
+}
 
 addEventListener('keydown',(evt)=>{
   switch (evt.key) {
@@ -139,8 +176,9 @@ addEventListener('keydown',(evt)=>{
       let bullet = new Bullet();
       bullet.pos.dx = greenTank.pos.dx;
       bullet.pos.dy = greenTank.pos.dy;
-      bullet.vel.dx = greenTank.vel.dx * 2;
-      bullet.vel.dy = greenTank.vel.dy * 2;
+      bullet.vel.dx = greenTank.vel.dx;
+      bullet.vel.dy = greenTank.vel.dy;
+      bullet.vel.magnitude = 15;
       bullets.push(bullet);
     break;
     default:
