@@ -31,6 +31,8 @@ function animate(){
     player.velocity.dy = -player.velocity.dy;
   }
 
+  player.velocity.draw(context,player.position.dx,player.position.dy,30 )
+
   player.position.add(player.velocity);
   player.point.position(player.position);
   player.point.draw(context);
