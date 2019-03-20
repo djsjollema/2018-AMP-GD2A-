@@ -5,5 +5,7 @@ body{
 }
 
 #canvas{
-  background-color: snow;
+
+  background-color: aliceblue;
+  overflow: hidden;
 }

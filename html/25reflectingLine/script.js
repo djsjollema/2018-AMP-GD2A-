@@ -27,6 +27,12 @@ function setUp(){
 function animate(){
   requestAnimationFrame(animate);
   context.clearRect(0,0,canvas.width,canvas.height);
+  context.beginPath();
+  context.moveTo(canvas.width,0);
+  context.lineTo(canvas.width,l.calcY(canvas.width));
+  context.lineTo(0,l.calcY(0));
+  context.closePath();
+  context.fill();
 
   if(player.position.dx < player.point.r || player.position.dx > canvas.width - player.point.r){
     player.velocity.dx = -player.velocity.dx;
