@@ -11,7 +11,7 @@ function setUp(){
   player = {};
   player.pos = new Vector2d(100,100);
   player.vel = new Vector2d(7,8);
-  player.point = new Point(player.pos.dx,player.pos.dy,10,"yellow");
+  player.point = new Point(player.pos.dx,player.pos.dy,20,"yellow");
 
   rad = new Vector2d(1,1);
   tan = new Vector2d(1,1);
@@ -39,12 +39,18 @@ function animate(){
   tan.dy = rad.dx;
 
   if(rad.magnitude<player.point.r + bumper.r){
-    console.log('collision');
+    rad.magnitude = 1;
+    tan.magnitude = 1;
+    rad.magnitude = player.vel.dot(rad);
+    tan.magnitude = player.vel.dot(tan);
+    //rad.draw(context,player.pos.dx,player.pos.dy,10);
+    //tan.draw(context,player.pos.dx,player.pos.dy,10);
+    rad.angle += Math.PI;
+    player.vel.sumVector(rad,tan);
   }
 
-  player.vel.draw(context,player.pos.dx,player.pos.dy,10);
-  rad.draw(context,player.pos.dx,player.pos.dy,1);
-  tan.draw(context,player.pos.dx,player.pos.dy,1);
+  //player.vel.draw(context,player.pos.dx,player.pos.dy,10);
+
   player.point.draw(context);
 }
 
