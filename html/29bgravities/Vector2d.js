@@ -58,7 +58,7 @@ class Vector2d {
     context.save();
     context.translate(x,y);
     context.rotate(Math.atan2(this.dy,this.dx))
-    context.fillStyle = color || "rgba(255,255,255,0.4)";
+    context.fillStyle = "rgba(255,255,255,0.2)";
 
     context.beginPath();
     context.moveTo(0,0);
